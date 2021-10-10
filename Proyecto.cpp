@@ -642,7 +642,11 @@ void MultiTareaMonoProceso(list<Proceso> &procesos, char plan[])
     list<Proceso> sac;
     list<Proceso> ord;
     ////////////////////////////////
-
+    int ultimo = 0;
+    for(Proceso& proceso: procesos)
+            if(proceso.getT_Llegada() > ultimo)
+                ultimo = proceso.getT_Llegada();
+    /////////////////////
     do
     {
         if(!porEjecutar.empty())
@@ -707,7 +711,7 @@ void MultiTareaMonoProceso(list<Proceso> &procesos, char plan[])
         //system("cls");
         ciclo++;
     }
-    while(!enEspera.empty());
+    while(!enEspera.empty() || ciclo < ultimo);
 }
 
 void MultiTareaMultiProceso(list<Proceso> &procesos, char plan[])
@@ -726,6 +730,11 @@ void MultiTareaMultiProceso(list<Proceso> &procesos, char plan[])
     list<Proceso> sac;
     list<Proceso> ord;
     ////////////////////////////////
+    int ultimo = 0;
+    for(Proceso& proceso: procesos)
+            if(proceso.getT_Llegada() > ultimo)
+                ultimo = proceso.getT_Llegada();
+    /////////////////////
 
     do
     {
@@ -818,7 +827,7 @@ void MultiTareaMultiProceso(list<Proceso> &procesos, char plan[])
         //system("cls");
         ciclo++;
     }
-    while(!enEspera.empty());
+    while(!enEspera.empty()|| ciclo < ultimo);
 }
 
 int main()
